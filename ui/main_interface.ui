@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>165</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>161</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>159</width>
+       <height>249</height>
+      </rect>
+     </property>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>160</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="passwordsLayout"/>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>165</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFlashcard">
+    <property name="title">
+     <string>Key</string>
+    </property>
+    <addaction name="actionCreate_new_flash_key"/>
+    <addaction name="actionChange_current_flash_keys"/>
+   </widget>
+   <widget class="QMenu" name="menuPassword">
+    <property name="title">
+     <string>Password</string>
+    </property>
+    <addaction name="actionAdd_password"/>
+    <addaction name="actionRemove_password"/>
+   </widget>
+   <addaction name="menuFlashcard"/>
+   <addaction name="menuPassword"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionCreate_new_flash_key">
+   <property name="text">
+    <string>Create new flash-key</string>
+   </property>
+  </action>
+  <action name="actionChange_current_flash_keys">
+   <property name="text">
+    <string>Change current flash-keys</string>
+   </property>
+  </action>
+  <action name="actionAdd_password">
+   <property name="text">
+    <string>Add password</string>
+   </property>
+  </action>
+  <action name="actionRemove_password">
+   <property name="text">
+    <string>Remove password</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
