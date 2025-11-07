@@ -53,22 +53,18 @@ class Scat(QMainWindow):
         self.password_setter()
 
     def setup_scroll_area(self):
-        """Настройка скроллируемой области для паролей"""
-        # Создаем виджет-контейнер для кнопок
         self.scroll_widget = QWidget()
         self.scroll_layout = QVBoxLayout(self.scroll_widget)
         self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.scroll_layout.setContentsMargins(0, 0, 0, 0)
-        self.scroll_layout.setSpacing(2)  # Небольшой отступ между кнопками
+        self.scroll_layout.setSpacing(2)
 
-        # Создаем область прокрутки
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.scroll_area.setWidget(self.scroll_widget)
 
-        # Добавляем scroll area в существующий passwordsLayout
         self.passwordsLayout.addWidget(self.scroll_area)
 
     def create_new_flash_card(self):
