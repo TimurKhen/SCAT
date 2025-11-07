@@ -1,3 +1,5 @@
+import os
+
 from PyQt6 import uic
 from PyQt6.QtWidgets import QFileDialog, QWidget
 
@@ -28,11 +30,16 @@ class CreateNewFlashCard(QWidget):
     def changed_status_of_sure(self):
         self.createFlash.setEnabled(self.sureCheckBox.isChecked() and len(self.controlText.text()) == 3)
 
+    def passwords_file_cleaner(self):
+        password_path = r"C:\Program Files\SCAT\passwords.txt"
+        os.remove(password_path)
+
     def create_flash(self):
         if not self.flash_card_for:
             return
+        self.passwords_file_cleaner()
 
-        key = Key(self.controlText.text(), self.flash_card_for)
+        key = Key(self.flash_card_for)
         controller["key"] = key
         controller["flash_card_path"] = self.flash_card_for
 

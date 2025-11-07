@@ -1,16 +1,20 @@
 from PyQt6 import uic
+from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QWidget, QLabel
 
 from interfaces.dataController import controller
 
 
 class PasswordActions(QWidget):
-    def __init__(self):
+    password_add = pyqtSignal(str)
+
+    def __init__(self, last_password_index=0):
         super().__init__()
         if controller["key"] is None:
-            errorLabel = QLabel("Please create an FlashCard first")
+            self.errorLabel = QLabel("Please create an FlashCard first")
         else:
             uic.loadUi('ui/passwordActions_interface.ui', self)
+            self.last_password_index = last_password_index
             self.initUI()
 
     def initUI(self):
@@ -28,6 +32,7 @@ class PasswordActions(QWidget):
             username = self.usernameLine.text()
             service = self.serviceLine.text()
             controller["key"].add_password(username, password, service)
+            self.password_add.emit('')
             self.close()
         except Exception as e:
             print(e)

@@ -24,7 +24,7 @@ def create_numeric_form(string):
     return hex(ords)[2:].zfill(2)
 
 
-def key_generator(sum: str):
+def key_generator():
     count_of_keys = 0
 
     random.seed(None)
@@ -34,7 +34,7 @@ def key_generator(sum: str):
     count_of_keys += 1
 
     for j in range(256):
-        codes.append(generator.random_hex_value() + sum)
+        codes.append(generator.random_hex_value())
 
     return codes
 
