@@ -12,6 +12,7 @@ class GetInformationOfFlashCard(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('ui/FlashCardOnOpen_interface.ui', self)
+        self.setGeometry(400, 300, 400, 300)
         self.initUI()
 
     def initUI(self):

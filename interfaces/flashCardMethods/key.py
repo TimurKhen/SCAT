@@ -12,8 +12,6 @@ class Key:
         else:
             self.last_index = last_password_index
 
-        print(self.last_index)
-
     def run(self):
         self.generate_key()
 
@@ -45,8 +43,5 @@ class Key:
 
         with open(f'{self.folder_path}/key.txt', 'a', encoding='utf-8') as f:
             f.write(str(hex(self.last_index)[2:].zfill(2)) + ' ' + ' '.join(k) + '\n')
-            print(str(hex(self.last_index)[2:].zfill(2)) + ' ' + ' '.join(k) + '\n')
 
         self.last_index += 1
-
-    # def clear_password(self, number):

@@ -4,10 +4,10 @@
  <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>186</width>
-    <height>123</height>
+    <x>300</x>
+    <y>300</y>
+    <width>200</width>
+    <height>150</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>151</width>
-     <height>51</height>
+     <width>200</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">

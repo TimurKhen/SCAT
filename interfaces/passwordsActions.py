@@ -28,9 +28,9 @@ class PasswordActions(QWidget):
 
     def add_event(self):
         try:
-            password = self.passwordLine.text()
-            username = self.usernameLine.text()
-            service = self.serviceLine.text()
+            username = str(self.usernameLine.text())
+            password = str(self.passwordLine.text())
+            service = str(self.serviceLine.text())
             controller["key"].add_password(username, password, service)
             self.password_add.emit('')
             self.close()

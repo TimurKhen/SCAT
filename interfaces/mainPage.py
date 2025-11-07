@@ -9,6 +9,7 @@ from interfaces.createNewFlashCard import CreateNewFlashCard
 from interfaces.dataController import controller
 from interfaces.flashCardMethods.key import Key
 from interfaces.onBootMenu import GetInformationOfFlashCard
+from interfaces.passwordShower import PasswordShower
 from interfaces.passwordsActions import PasswordActions
 
 
@@ -67,13 +68,25 @@ class Scat(QMainWindow):
 
         self.passwordsLayout.addWidget(self.scroll_area)
 
+    def on_flash_card_selected(self, directory_path):
+        key = Key(directory_path, self.get_last_key_index())
+        controller["key"] = key
+        self.load_passwords()
+        print(controller)
+
     def create_new_flash_card(self):
         self.create_new_flash_card_form = CreateNewFlashCard()
         self.create_new_flash_card_form.show()
         print('Created new flash card')
 
+    def get_last_key_index(self):
+        with open(f'{controller["flash_card_path"]}/key.txt', 'r', encoding='utf-8') as f:
+            readed = f.read()
+            data = readed.split('\n')
+            return len(data) - 1
+
     def add_password(self):
-        self.add_new_password_form = PasswordActions(self.passwords_in_layout[-1])
+        self.add_new_password_form = PasswordActions(self.get_last_key_index())
         self.add_new_password_form.password_add.connect(self.load_passwords)
         self.add_new_password_form.show()
         print('Adding new password')
@@ -84,17 +97,15 @@ class Scat(QMainWindow):
         self.bootMenu.flash_card_created.connect(self.create_new_flash_card)
         self.bootMenu.show()
 
-    def get_last_key_index(self):
-        with open(f'{controller["flash_card_path"]}/key.txt', 'r', encoding='utf-8') as f:
-            readed = f.read()
-            data = readed.split('\n')
-            return len(data) - 1
+    def password_create_form(self):
+        username_from_sender = self.sender().property("username")
+        password_from_sender = self.sender().property("password")
+        service_from_sender = self.sender().property("service")
+        index = self.sender().property("index")
 
-    def on_flash_card_selected(self, directory_path):
-        key = Key(directory_path, self.get_last_key_index())
-        controller["key"] = key
-        self.load_passwords()
-        print(controller)
+        data = [username_from_sender, password_from_sender, service_from_sender]
+        self.password_form = PasswordShower(index, data)
+        self.password_form.show()
 
     def load_passwords(self):
         try:
@@ -123,9 +134,15 @@ class Scat(QMainWindow):
                                     padding: 5px;
                                 }
                                 QPushButton:hover {
-                                    background-color: #e0e0e0;
+                                    background-color: #88706B;
                                 }
                             """)
+                            button.clicked.connect(self.password_create_form)
+                            button.setProperty("password", splited[0])
+                            button.setProperty("username", splited[4])
+                            button.setProperty("service", splited[8])
+                            button.setProperty("index", splited[2])
+
                             self.scroll_layout.addWidget(button)
                             self.passwords_in_layout.append(int(splited[2]))
 
