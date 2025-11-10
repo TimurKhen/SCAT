@@ -8,7 +8,7 @@ class Key:
     def __init__(self, folder_path, last_password_index=0):
         self.folder_path = folder_path
         if last_password_index == 0:
-            self.last_index = last_password_index
+            self.last_index = 1
         else:
             self.last_index = last_password_index
 
@@ -28,9 +28,8 @@ class Key:
 
         if not os.path.exists(password_path):
             try:
-                with open(password_path, 'x') as f:
-                    f.write('')
-                    f.close()
+                with open(password_path, 'w') as f:
+                    pass
             except FileExistsError:
                 pass
 

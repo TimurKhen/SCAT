@@ -72,12 +72,10 @@ class Scat(QMainWindow):
         key = Key(directory_path, self.get_last_key_index())
         controller["key"] = key
         self.load_passwords()
-        print(controller)
 
     def create_new_flash_card(self):
         self.create_new_flash_card_form = CreateNewFlashCard()
         self.create_new_flash_card_form.show()
-        print('Created new flash card')
 
     def get_last_key_index(self):
         with open(f'{controller["flash_card_path"]}/key.txt', 'r', encoding='utf-8') as f:
@@ -89,7 +87,6 @@ class Scat(QMainWindow):
         self.add_new_password_form = PasswordActions(self.get_last_key_index())
         self.add_new_password_form.password_add.connect(self.load_passwords)
         self.add_new_password_form.show()
-        print('Adding new password')
 
     def password_setter(self):
         self.bootMenu = GetInformationOfFlashCard()

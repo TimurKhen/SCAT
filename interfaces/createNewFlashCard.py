@@ -31,8 +31,9 @@ class CreateNewFlashCard(QWidget):
         self.createFlash.setEnabled(self.sureCheckBox.isChecked() and len(self.controlText.text()) == 3)
 
     def passwords_file_cleaner(self):
-        password_path = r"C:\Program Files\SCAT\passwords.txt"
-        os.remove(password_path)
+        password_path = "C:\Program Files\SCAT\passwords.txt"
+        with open(password_path, 'w') as f:
+            pass
 
     def create_flash(self):
         if not self.flash_card_for:
@@ -44,10 +45,6 @@ class CreateNewFlashCard(QWidget):
         controller["flash_card_path"] = self.flash_card_for
 
         path = [
-            # {
-            #     'worker': Cleaner(self.flash_card_for),
-            #     'status': 'Форматирование'
-            # },
             {
                 'worker': key,
                 'status': 'Создание ключей'
