@@ -1,7 +1,7 @@
 import os
 
-from PyQt6 import uic
-from PyQt6.QtWidgets import QFileDialog, QWidget
+from PyQt5 import uic
+from PyQt5.QtWidgets import QFileDialog, QWidget
 
 from interfaces.dataController import controller
 from interfaces.flashCardMethods.key import Key
@@ -31,9 +31,22 @@ class CreateNewFlashCard(QWidget):
         self.createFlash.setEnabled(self.sureCheckBox.isChecked() and len(self.controlText.text()) == 3)
 
     def passwords_file_cleaner(self):
-        password_path = "C:\Program Files\SCAT\passwords.txt"
-        with open(password_path, 'w') as f:
-            pass
+        try:
+            password_path = "C://SCAT/passwords.txt"
+
+            password_path = os.path.normpath(password_path)
+
+            directory = os.path.dirname(password_path)
+            if directory and not os.path.exists(directory):
+                os.makedirs(directory)
+
+            with open(password_path, 'w') as f:
+                f.write('')
+
+            print(f"Файл {password_path} успешно очищен")
+
+        except Exception as e:
+            print(e)
 
     def create_flash(self):
         if not self.flash_card_for:

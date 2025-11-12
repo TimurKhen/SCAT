@@ -24,20 +24,20 @@ class Key:
             f.write(' '.join(h1) + '\n')
 
     def add_password(self, username, password, service):
-        password_path = "C:/Program Files/SCAT/passwords.txt"
+        password_path = "C://SCAT/passwords.txt"
 
         if not os.path.exists(password_path):
             try:
                 with open(password_path, 'w') as f:
-                    pass
+                    f.write('')
             except FileExistsError:
-                pass
+                print(f'No file exists {password_path}')
 
         k = key_generator()
         with open(password_path, 'a', encoding='utf-8') as f:
             B = X256()
             encoded_value = B.generate(password, k)
-            f.write(f'{str(encoded_value)} -- {self.last_index} -- {username} -- {self.last_index} -- {service}\n')
+            f.write(f'{str(encoded_value)} {self.last_index} {username} {service}\n')
             f.close()
 
         with open(f'{self.folder_path}/key.txt', 'a', encoding='utf-8') as f:

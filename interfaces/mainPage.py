@@ -1,9 +1,10 @@
 import ctypes
+import os
 import sys
 
-from PyQt6 import uic
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QMainWindow, QPushButton, QScrollArea, QVBoxLayout, QWidget
+from PyQt5 import uic
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QScrollArea, QVBoxLayout, QWidget
 
 from interfaces.createNewFlashCard import CreateNewFlashCard
 from interfaces.dataController import controller
@@ -107,7 +108,12 @@ class Scat(QMainWindow):
     def load_passwords(self):
         try:
             if controller.get('flash_card_path'):
-                password_path = "C:\Program Files\SCAT\passwords.txt"
+                password_path = "C://SCAT/passwords.txt"
+                print(os.path.exists(password_path))
+                if not os.path.exists(password_path):
+                    with open(password_path, "w") as f:
+                        f.write("")
+
                 with open(password_path, "r") as f:
                     line = f.readline()
 
@@ -118,12 +124,12 @@ class Scat(QMainWindow):
                             continue
 
                         splited = line.split(" ")
-                        if len(splited) >= 9 and int(splited[2]) in self.passwords_in_layout:
+                        if int(splited[1]) in self.passwords_in_layout:
                             line = f.readline()
                             continue
 
-                        if len(splited) >= 9:
-                            button = QPushButton(f'{splited[2]}: {splited[8]}')
+                        if len(splited) >= 4:
+                            button = QPushButton(f'{splited[1]}: {splited[3]}')
                             button.setFixedHeight(30)
                             button.setStyleSheet("""
                                 QPushButton {
@@ -136,17 +142,17 @@ class Scat(QMainWindow):
                             """)
                             button.clicked.connect(self.password_create_form)
                             button.setProperty("password", splited[0])
-                            button.setProperty("username", splited[4])
-                            button.setProperty("service", splited[8])
-                            button.setProperty("index", splited[2])
+                            button.setProperty("username", splited[2])
+                            button.setProperty("service", splited[3])
+                            button.setProperty("index", splited[1])
 
                             self.scroll_layout.addWidget(button)
-                            self.passwords_in_layout.append(int(splited[2]))
+                            self.passwords_in_layout.append(int(splited[1]))
 
                         line = f.readline()
 
         except FileExistsError and FileNotFoundError:
-            password_path = "C:\Program Files\SCAT\passwords.txt"
+            password_path = "C://SCAT/passwords.txt"
             with open(password_path, "w") as f:
                 f.write("")
         except Exception as e:

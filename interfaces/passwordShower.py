@@ -2,8 +2,8 @@ import math
 import random
 
 import pyperclip
-from PyQt6 import uic
-from PyQt6.QtWidgets import QWidget
+from PyQt5 import uic
+from PyQt5.QtWidgets import QWidget
 
 from X256.X256 import X256
 from interfaces.dataController import controller

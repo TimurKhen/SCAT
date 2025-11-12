@@ -103,8 +103,8 @@
     </rect>
    </property>
    <property name="text">
-    <string>Введите 3 символа - 
- они будут использоваться для дешифрации</string>
+    <string>Введите 3 символа -
+    подтверждение ваших намерений</string>
    </property>
   </widget>
  </widget>

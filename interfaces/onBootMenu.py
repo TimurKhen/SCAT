@@ -1,6 +1,6 @@
-from PyQt6 import uic
-from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QWidget, QFileDialog
+from PyQt5 import uic
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QFileDialog
 
 from interfaces.dataController import controller
 
