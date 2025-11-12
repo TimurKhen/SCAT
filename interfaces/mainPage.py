@@ -70,24 +70,29 @@ class Scat(QMainWindow):
         self.passwordsLayout.addWidget(self.scroll_area)
 
     def on_flash_card_selected(self, directory_path):
-        key = Key(directory_path, self.get_last_key_index())
-        controller["key"] = key
-        self.load_passwords()
+        flash_path = controller["flash_card_path"]
+
+        if flash_path is not None:
+            key = Key(directory_path, self.get_last_key_index())
+            controller["key"] = key
+            self.load_passwords()
 
     def create_new_flash_card(self):
         self.create_new_flash_card_form = CreateNewFlashCard()
         self.create_new_flash_card_form.show()
 
     def get_last_key_index(self):
-        with open(f'{controller["flash_card_path"]}/key.txt', 'r', encoding='utf-8') as f:
+        flash_path = controller["flash_card_path"]
+        with open(f'{flash_path}/key.txt', 'r', encoding='utf-8') as f:
             readed = f.read()
             data = readed.split('\n')
             return len(data) - 1
 
     def add_password(self):
-        self.add_new_password_form = PasswordActions(self.get_last_key_index())
-        self.add_new_password_form.password_add.connect(self.load_passwords)
-        self.add_new_password_form.show()
+        if controller["flash_card_path"]:
+            self.add_new_password_form = PasswordActions(self.get_last_key_index())
+            self.add_new_password_form.password_add.connect(self.load_passwords)
+            self.add_new_password_form.show()
 
     def password_setter(self):
         self.bootMenu = GetInformationOfFlashCard()

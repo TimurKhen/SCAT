@@ -49,29 +49,30 @@ class CreateNewFlashCard(QWidget):
             print(e)
 
     def create_flash(self):
-        if not self.flash_card_for:
+        if self.flash_card_for is None:
             return
         self.passwords_file_cleaner()
 
-        key = Key(self.flash_card_for)
-        controller["key"] = key
-        controller["flash_card_path"] = self.flash_card_for
-
-        path = [
-            {
-                'worker': key,
-                'status': 'Создание ключей'
-            }
-        ]
-
         try:
-            for i in path:
-                i['worker'].run()
-                self.selectedFlashName.setText(str(i['status']))
+            key = Key(self.flash_card_for)
+            controller["key"] = key
+            controller["flash_card_path"] = self.flash_card_for
 
-            self.selectedFlashName.setText('Флешкарта успешно создана')
+            path = [
+                {
+                    'worker': key,
+                    'status': 'Создание ключей'
+                }
+            ]
+
+            try:
+                for i in path:
+                    i['worker'].run()
+                    self.selectedFlashName.setText(str(i['status']))
+
+                self.selectedFlashName.setText('Флешкарта успешно создана')
+            except Exception as e:
+                self.selectedFlashName.setText(f'Ошибка во время создания флешкарты: {e}')
+                print(e)
         except Exception as e:
-            self.selectedFlashName.setText(f'Ошибка во время создания флешкарты: {e}')
             print(e)
-
-        # self.close()

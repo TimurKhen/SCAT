@@ -63,14 +63,12 @@
      <string>Key</string>
     </property>
     <addaction name="actionCreate_new_flash_key"/>
-    <addaction name="actionChange_current_flash_keys"/>
    </widget>
    <widget class="QMenu" name="menuPassword">
     <property name="title">
      <string>Password</string>
     </property>
     <addaction name="actionAdd_password"/>
-    <addaction name="actionRemove_password"/>
    </widget>
    <addaction name="menuFlashcard"/>
    <addaction name="menuPassword"/>
@@ -81,19 +79,9 @@
     <string>Create new flash-key</string>
    </property>
   </action>
-  <action name="actionChange_current_flash_keys">
-   <property name="text">
-    <string>Change current flash-keys</string>
-   </property>
-  </action>
   <action name="actionAdd_password">
    <property name="text">
     <string>Add password</string>
-   </property>
-  </action>
-  <action name="actionRemove_password">
-   <property name="text">
-    <string>Remove password</string>
    </property>
   </action>
  </widget>

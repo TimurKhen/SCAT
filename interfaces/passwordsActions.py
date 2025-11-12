@@ -1,5 +1,6 @@
 from PyQt5 import uic
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QUrl
+from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QWidget, QLabel
 
 from interfaces.dataController import controller
@@ -20,6 +21,14 @@ class PasswordActions(QWidget):
     def initUI(self):
         self.clearButton.clicked.connect(self.clear_event)
         self.addButton.clicked.connect(self.add_event)
+        self.pushButton.clicked.connect(self.open_url)
+
+    def open_url(self):
+        try:
+            url = QUrl('https://github.com/TimurKhen/X256/blob/master/README.md')
+            QDesktopServices.openUrl(url)
+        except Exception as e:
+            print(e)
 
     def clear_event(self):
         self.passwordLine.setText("")
