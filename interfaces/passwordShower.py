@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QWidget
 
 from X256.X256 import X256
 from interfaces.dataController import controller
+from interfaces.resource import resource_path
 
 
 class PasswordShower(QWidget):
@@ -17,7 +18,7 @@ class PasswordShower(QWidget):
         self.coded_password = data[1]
         self.service = data[2]
 
-        uic.loadUi('ui/read_password.ui', self)
+        uic.loadUi(resource_path('ui/read_password.ui'), self)
         self.initUI()
 
     def initUI(self):

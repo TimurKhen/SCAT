@@ -5,12 +5,13 @@ from PyQt5.QtWidgets import QFileDialog, QWidget
 
 from interfaces.dataController import controller
 from interfaces.flashCardMethods.key import Key
+from interfaces.resource import resource_path
 
 
 class CreateNewFlashCard(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('ui/createNewFlash_interface.ui', self)
+        uic.loadUi(resource_path('ui/createNewFlash_interface.ui'), self)
         # self.folder_path = folder_path
         self.initUI()
 

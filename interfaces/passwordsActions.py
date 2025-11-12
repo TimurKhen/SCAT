@@ -4,6 +4,7 @@ from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QWidget, QLabel
 
 from interfaces.dataController import controller
+from interfaces.resource import resource_path
 
 
 class PasswordActions(QWidget):
@@ -14,7 +15,7 @@ class PasswordActions(QWidget):
         if controller["key"] is None:
             self.errorLabel = QLabel("Please create an FlashCard first")
         else:
-            uic.loadUi('ui/passwordActions_interface.ui', self)
+            uic.loadUi(resource_path('ui/passwordActions_interface.ui'), self)
             self.last_password_index = last_password_index
             self.initUI()
 

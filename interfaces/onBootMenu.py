@@ -3,6 +3,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QFileDialog
 
 from interfaces.dataController import controller
+from interfaces.resource import resource_path
 
 
 class GetInformationOfFlashCard(QWidget):
@@ -11,7 +12,7 @@ class GetInformationOfFlashCard(QWidget):
 
     def __init__(self):
         super().__init__()
-        uic.loadUi('ui/FlashCardOnOpen_interface.ui', self)
+        uic.loadUi(resource_path('ui/FlashCardOnOpen_interface.ui'), self)
         self.setGeometry(400, 300, 400, 300)
         self.initUI()
 

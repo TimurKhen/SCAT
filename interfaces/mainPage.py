@@ -12,6 +12,7 @@ from interfaces.flashCardMethods.key import Key
 from interfaces.onBootMenu import GetInformationOfFlashCard
 from interfaces.passwordShower import PasswordShower
 from interfaces.passwordsActions import PasswordActions
+from interfaces.resource import resource_path
 
 
 class Scat(QMainWindow):
@@ -20,7 +21,7 @@ class Scat(QMainWindow):
         if not self.is_admin():
             self.restart_as_admin()
         else:
-            uic.loadUi('ui/main_interface.ui', self)
+            uic.loadUi(resource_path('ui/main_interface.ui'), self)
             self.passwords_in_layout = []
             self.initUI()
 
