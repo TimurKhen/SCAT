@@ -74,9 +74,11 @@ class Scat(QMainWindow):
         flash_path = controller["flash_card_path"]
 
         if flash_path is not None:
-            key = Key(directory_path, self.get_last_key_index())
-            controller["key"] = key
-            self.load_passwords()
+            last_index = self.get_last_key_index()
+            if last_index != -1:
+                key = Key(directory_path, last_index)
+                controller["key"] = key
+                self.load_passwords()
 
     def create_new_flash_card(self):
         self.create_new_flash_card_form = CreateNewFlashCard()
@@ -84,16 +86,21 @@ class Scat(QMainWindow):
 
     def get_last_key_index(self):
         flash_path = controller["flash_card_path"]
-        with open(f'{flash_path}/key.txt', 'r', encoding='utf-8') as f:
-            readed = f.read()
-            data = readed.split('\n')
-            return len(data) - 1
+        if os.path.exists(f'{flash_path}/key.txt'):
+            with open(f'{flash_path}/key.txt', 'r', encoding='utf-8') as f:
+                readed = f.read()
+                data = readed.split('\n')
+                return len(data) - 1
+        else:
+            return -1
 
     def add_password(self):
         if controller["flash_card_path"]:
-            self.add_new_password_form = PasswordActions(self.get_last_key_index())
-            self.add_new_password_form.password_add.connect(self.load_passwords)
-            self.add_new_password_form.show()
+            last_index = self.get_last_key_index()
+            if last_index != -1:
+                self.add_new_password_form = PasswordActions(last_index)
+                self.add_new_password_form.password_add.connect(self.load_passwords)
+                self.add_new_password_form.show()
 
     def password_setter(self):
         self.bootMenu = GetInformationOfFlashCard()

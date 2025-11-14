@@ -19,9 +19,9 @@ class Key:
         flash_path = self.folder_path
 
         h1 = generate_headers()
-
         with open(f'{flash_path}/key.txt', 'w', encoding='utf-8') as f:
             f.write(' '.join(h1) + '\n')
+
 
     def add_password(self, username, password, service):
         password_path = "C://SCAT/passwords.txt"
